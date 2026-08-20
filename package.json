@@ -9,8 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "prepare": "npm run build"
+    "build": "tsup src/index.ts --format cjs,esm --dts"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
