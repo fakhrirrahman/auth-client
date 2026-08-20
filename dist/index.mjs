@@ -38,6 +38,19 @@ var HttpAuthClient = class {
       }
     };
   }
+  async refreshToken(token) {
+    const response = await fetch(`${this.baseUrl}/api/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Cookie": `refresh_token=${token}`
+      }
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Refresh token failed");
+    }
+    return data;
+  }
   async verifyToken(token) {
     const response = await fetch(`${this.baseUrl}/api/auth/me`, {
       method: "GET",

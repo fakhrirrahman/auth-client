@@ -53,6 +53,23 @@ export class HttpAuthClient implements IAuthClient {
     };
   }
 
+  async refreshToken(token: string): Promise<any> {
+    const response = await fetch(`${this.baseUrl}/api/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Cookie": `refresh_token=${token}`,
+      },
+    });
+
+    const data = (await response.json()) as any;
+
+    if (!response.ok) {
+      throw new Error(data.message || "Refresh token failed");
+    }
+
+    return data;
+  }
+
   async verifyToken(token: string): Promise<AuthenticatedUser> {
     const response = await fetch(`${this.baseUrl}/api/auth/me`, {
       method: "GET",

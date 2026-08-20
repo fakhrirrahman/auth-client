@@ -16,6 +16,7 @@ type VerifyTokenResult = {
 
 interface IAuthClient {
     login(credentials: Record<string, any>): Promise<any>;
+    refreshToken(token: string): Promise<any>;
     verifyToken(token: string): Promise<AuthenticatedUser>;
     hasPermission(user: AuthenticatedUser, permission: string): boolean;
 }
@@ -24,6 +25,7 @@ declare class HttpAuthClient implements IAuthClient {
     private baseUrl;
     constructor(baseUrl?: string);
     login(credentials: Record<string, any>): Promise<any>;
+    refreshToken(token: string): Promise<any>;
     verifyToken(token: string): Promise<AuthenticatedUser>;
     hasPermission(user: AuthenticatedUser, permission: string): boolean;
 }
