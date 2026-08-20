@@ -1,7 +1,7 @@
 {
   "name": "@zentrix/auth-client",
   "version": "1.0.0",
-  "description": "Auth contracts and types for Zentrix ecosystem",
+  "description": "Auth Contract and Types for Zentrix Ecosystem",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "prepublishOnly": "npm run build"
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

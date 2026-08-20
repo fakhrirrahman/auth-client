@@ -1,9 +1,5 @@
-# Dependencies
 node_modules/
-
-# Logs & Environment
+dist/
 *.log
 .env
-
-# OS Files
 .DS_Store
