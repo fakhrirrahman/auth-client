@@ -16,7 +16,27 @@ var HttpAuthClient = class {
     if (!response.ok) {
       throw new Error(data.message || "Login failed");
     }
-    return data;
+    const setCookieHeader = response.headers.get("set-cookie");
+    let refreshToken = "";
+    if (setCookieHeader) {
+      const match = setCookieHeader.match(/refresh_token=([^;]+)/);
+      if (match) {
+        refreshToken = match[1];
+      }
+    }
+    const accessToken = data.data?.access_token || data.access_token;
+    let user = null;
+    if (accessToken) {
+      user = await this.verifyToken(accessToken).catch(() => null);
+    }
+    return {
+      ...data,
+      data: {
+        ...data.data,
+        refresh_token: refreshToken,
+        user
+      }
+    };
   }
   async verifyToken(token) {
     const response = await fetch(`${this.baseUrl}/api/auth/me`, {
